@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #111111;
+}
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 25px 35px 50px;
+  background: #f7f7f7;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo,
+.board-button {
+  height: 66px;
+  border: 2px solid #e1bd4c;
+  border-radius: 11px;
+  font-size: 16px;
+  background: #fff3cc;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  font-size: 21px;
+}
+.search-form {
+  flex-grow: 1;
+}
+.search {
+  width: 100%;
+  height: 66px;
+  padding: 0 20px;
+  border: 2px solid #e9b946;
+  border-radius: 11px;
+  text-align: center;
+  background: #ffe7c8;
+}
+.search::placeholder {
+  color: #111111;
+}
+.board-button {
+  min-width: 150px;
+  border-color: #75aa63;
+  background: #dcefd4;
+}
+.board-button span {
+  font-size: 21px;
+}
+.pins {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(130px, 1fr));
+  gap: 35px;
+  margin-top: 32px;
+}
+.column {
+  min-width: 0;
+}
+.column-down,
+.column-down-small {
+  padding-top: 0;
+}
+.pin {
+  margin-bottom: 45px;
+}
+.photo {
+  position: relative;
+  height: 195px;
+  border: 2px solid #666666;
+  border-radius: 22px;
+  background: #ffffff;
+}
+.photo::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 23px;
+  height: 23px;
+  border: 2px solid #90afe0;
+  border-radius: 50%;
+  background: #dce9fb;
+}
+.pin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 0 8px;
+}
+.avatar {
+  width: 37px;
+  height: 37px;
+  border: 2px solid #bf99ce;
+  border-radius: 50%;
+  background: #eadff0;
+}
+.pin-info p {
+  margin: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+@media (max-width: 1000px) {
+  .container {
+    padding: 20px;
+  }
+  .pins {
+    grid-template-columns: repeat(3, minmax(130px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 12px;
+  }
+  .header {
+    flex-wrap: wrap;
+  }
+  .logo,
+  .board-button {
+    height: 50px;
+  }
+  .search-form {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .search {
+    height: 50px;
+  }
+  .pins {
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 15px;
+  }
+  .column,
+  .column-down,
+  .column-down-small {
+    padding-top: 0;
+  }
+}

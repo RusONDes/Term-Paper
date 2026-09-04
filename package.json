@@ -1,0 +1,24 @@
+{
+  "name": "pinterest-clone",
+  "version": "1.0.0",
+  "description": "Учебный клон Pinterest",
+  "private": true,
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RusONDes/Term-Paper.git"
+  },
+  "keywords": ["pinterest", "parcel", "course-project"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RusONDes/Term-Paper/issues"
+  },
+  "homepage": "https://github.com/RusONDes/Term-Paper#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
