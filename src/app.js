@@ -9,22 +9,54 @@ const checkIcon = `
 const pinsContainer = document.querySelector("#pins");
 const searchInput = document.querySelector("#search");
 
+const cancelButton = document.getElementById("cancel");
+const reportDialog = document.getElementById("reportDialog");
+
+cancelButton.addEventListener("click", function () {
+   reportDialog.close();
+});
+
+const claimScroll = document.querySelector(".claim-scroll");
+const claimHeader = document.querySelector(".claim-header");
+const claimActions = document.querySelector(".claim-actions");
+
+claimScroll.addEventListener("scroll", function () {
+   if (claimScroll.scrollTop > 0) {
+      claimHeader.classList.add("shadow");
+      claimActions.classList.add("shadow");
+   } else {
+      claimHeader.classList.remove("shadow");
+      claimActions.classList.remove("shadow");
+   }
+});
+
+const nextButton = document.getElementById("nextButton");
+
+const form = document.querySelector("#reportDialog form");
+
+form.addEventListener("change", function (event) {
+   if (event.target.matches('input[type="radio"]')) {
+      nextButton.disabled = false;
+   }
+});
+
+
 // Создаем надписи с хештегами.
 function createHashtags(hashtags) {
-  let result = "";
+   let result = "";
 
-  for (let hashtag of hashtags) {
-    result = result + "<span>#" + hashtag + "</span>";
-  }
+   for (let hashtag of hashtags) {
+      result = result + "<span>#" + hashtag + "</span>";
+   }
 
-  return result;
+   return result;
 }
 
 function createPin(pin) {
-  const card = document.createElement("article");
-  card.className = "pin";
-  card.id = pin.id;
-  card.innerHTML = `
+   const card = document.createElement("article");
+   card.className = "pin";
+   card.id = pin.id;
+   card.innerHTML = `
 
     <div class="photo" >
       <img src="${pin.image}" alt="${pin.title}">
@@ -49,76 +81,77 @@ function createPin(pin) {
 
   `;
 
-  const menu = card.querySelector(".pin-menu");
-  const menuButton = card.querySelector(".photo > button");
-  const saveButton = card.querySelector('.save-button');
-  const hideButton = card.querySelector('.hide-button');
-  const reportButton = card.querySelector('.report-button');
+   const menu = card.querySelector(".pin-menu");
+   const menuButton = card.querySelector(".photo > button");
+   const saveButton = card.querySelector('.save-button');
+   const hideButton = card.querySelector('.hide-button');
+   const reportButton = card.querySelector('.report-button');
 
-  menuButton.onclick = function () {
-    const menuWasClosed = menu.hidden;
-    closeMenus();
-    menu.hidden = !menuWasClosed;
-  };
+   menuButton.onclick = function () {
+      const menuWasClosed = menu.hidden;
+      closeMenus();
+      menu.hidden = !menuWasClosed;
+   };
 
-  saveButton.onclick = function () {
-    const text = saveButton.querySelector("span");
-    text.textContent = "Добавлено на доску";
-    closeMenus();
-  };
+   saveButton.onclick = function () {
+      const text = saveButton.querySelector("span");
+      text.textContent = "Добавлено на доску";
+      closeMenus();
+   };
 
-  hideButton.onclick = function () {
-    card.remove();
-  };
+   hideButton.onclick = function () {
+      card.remove();
+   };
 
-  reportButton.onclick = function () {
-    const text = reportButton.querySelector("span");
-    text.textContent = "Жалоба отправлена";
-    closeMenus();
-  };
+   reportButton.addEventListener("click", function () {
+      reportDialog.showModal();
+   });
 
-  return card;
+   return card;
 }
+
 
 // Показываем карточки на странице.
 function showPins(pins) {
-  pinsContainer.innerHTML = "";
+   pinsContainer.innerHTML = "";
 
-  for (let pin of pins) {
-    const card = createPin(pin);
-    pinsContainer.append(card);
-  }
+   for (let pin of pins) {
+      const card = createPin(pin);
+      pinsContainer.append(card);
+   }
 
-  if (pins.length === 0) {
-    pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
-  }
+   if (pins.length === 0) {
+      pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
+   }
 }
+
+
 
 // Закрываем все открытые меню.
 function closeMenus() {
-  const menus = document.querySelectorAll(".pin-menu");
+   const menus = document.querySelectorAll(".pin-menu");
 
-  for (let menu of menus) {
-    menu.hidden = true;
-  }
+   for (let menu of menus) {
+      menu.hidden = true;
+   }
 }
 
 // Ищем карточки по введенному тексту.
 function searchPins() {
-  const searchText = searchInput.value.toLowerCase();
-  const foundPins = [];
+   const searchText = searchInput.value.toLowerCase();
+   const foundPins = [];
 
-  for (let pin of pinsData) {
-    let pinText = pin.title + pin.description + pin.author;
-    pinText = pinText + pin.hashtags.join(" ");
-    pinText = pinText.toLowerCase();
+   for (let pin of pinsData) {
+      let pinText = pin.title + pin.description + pin.author;
+      pinText = pinText + pin.hashtags.join(" ");
+      pinText = pinText.toLowerCase();
 
-    if (pinText.includes(searchText)) {
-      foundPins.push(pin);
-    }
-  }
+      if (pinText.includes(searchText)) {
+         foundPins.push(pin);
+      }
+   }
 
-  showPins(foundPins);
+   showPins(foundPins);
 }
 
 searchInput.oninput = searchPins;
