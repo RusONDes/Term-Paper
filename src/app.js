@@ -1,4 +1,3 @@
-import { pinsData } from "./data.js";
 
 const checkIcon = `
   <svg class="menu-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -21,13 +20,24 @@ function updateBoardsList() {
       boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
       return;
    }
+   if (boards.length === 0) {
+      boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
+      return;
+   }
 
+   boardsList.innerHTML = "";
    boardsList.innerHTML = "";
 
    for (const name of boards) {
       const board = document.createElement("div");
       board.className = "board-item";
+   for (const name of boards) {
+      const board = document.createElement("div");
+      board.className = "board-item";
 
+      const boardName = document.createElement("span");
+      boardName.textContent = `📌 ${name}`;
+      board.append(boardName);
       const boardName = document.createElement("span");
       boardName.textContent = `📌 ${name}`;
       board.append(boardName);
@@ -42,7 +52,20 @@ function updateBoardsList() {
             updateBoardsList();
          }
       };
+      const deleteBoardButton = document.createElement("button");
+      deleteBoardButton.className = "delete-item";
+      deleteBoardButton.textContent = "✕";
+      deleteBoardButton.onclick = function () {
+         const index = boards.indexOf(name);
+         if (index !== -1) {
+            boards.splice(index, 1);
+            updateBoardsList();
+         }
+      };
 
+      board.append(deleteBoardButton);
+      boardsList.append(board);
+   }
       board.append(deleteBoardButton);
       boardsList.append(board);
    }
@@ -54,7 +77,16 @@ function createBoard() {
       alert("Введите название");
       return;
    }
+   const name = boardInput.value.trim();
+   if (!name) {
+      alert("Введите название");
+      return;
+   }
 
+   boards.push(name);
+   boardInput.value = "";
+   boardInput.focus();
+   updateBoardsList();
    boards.push(name);
    boardInput.value = "";
    boardInput.focus();
@@ -64,9 +96,12 @@ function createBoard() {
 function openBoardModal() {
    boardModal.showModal();
    updateBoardsList();
+   boardModal.showModal();
+   updateBoardsList();
 }
 
 function closeBoardModal() {
+   boardModal.close();
    boardModal.close();
 }
 
@@ -84,6 +119,7 @@ const reportForm = document.querySelector("#reportDialog form");
 
 cancelButton.addEventListener("click", function () {
    reportDialog.close();
+   reportDialog.close();
 });
 
 let currentReportCard = null;
@@ -100,9 +136,15 @@ claimScroll.addEventListener("scroll", function () {
    const hasScrollOffset = claimScroll.scrollTop > 0;
    claimHeader.classList.toggle("shadow", hasScrollOffset);
    claimActions.classList.toggle("shadow", hasScrollOffset);
+   const hasScrollOffset = claimScroll.scrollTop > 0;
+   claimHeader.classList.toggle("shadow", hasScrollOffset);
+   claimActions.classList.toggle("shadow", hasScrollOffset);
 });
 
 reportForm.addEventListener("change", function (event) {
+   if (event.target.matches('input[type="radio"]')) {
+      nextButton.disabled = false;
+   }
    if (event.target.matches('input[type="radio"]')) {
       nextButton.disabled = false;
    }
@@ -110,11 +152,16 @@ reportForm.addEventListener("change", function (event) {
 
 function createHashtags(hashtags) {
    let result = "";
+   let result = "";
 
    for (const hashtag of hashtags) {
       result += `<span>#${hashtag}</span>`;
    }
+   for (const hashtag of hashtags) {
+      result += `<span>#${hashtag}</span>`;
+   }
 
+   return result;
    return result;
 }
 
@@ -123,6 +170,10 @@ function createHashtags(hashtags) {
 function createPin(pin) {
    const card = document.createElement("article");
 
+   card.className = "pin";
+   card.id = pin.id;
+   card.innerHTML = `
+   const card = document.createElement("article");
    card.className = "pin";
    card.id = pin.id;
    card.innerHTML = `
@@ -153,7 +204,17 @@ function createPin(pin) {
    const saveButton = card.querySelector(".save-button");
    const hideButton = card.querySelector(".hide-button");
    const reportButton = card.querySelector(".report-button");
+   const menu = card.querySelector(".pin-menu");
+   const menuButton = card.querySelector(".photo > button");
+   const saveButton = card.querySelector(".save-button");
+   const hideButton = card.querySelector(".hide-button");
+   const reportButton = card.querySelector(".report-button");
 
+   menuButton.onclick = function () {
+      const menuWasClosed = menu.hidden;
+      closeMenus();
+      menu.hidden = !menuWasClosed;
+   };
    menuButton.onclick = function () {
       const menuWasClosed = menu.hidden;
       closeMenus();
@@ -164,7 +225,14 @@ function createPin(pin) {
       closeMenus();
       openBoardModal();
    };
+   saveButton.onclick = function () {
+      closeMenus();
+      openBoardModal();
+   };
 
+   hideButton.onclick = function () {
+      card.remove();
+   };
    hideButton.onclick = function () {
       card.remove();
    };
@@ -174,17 +242,45 @@ function createPin(pin) {
       currentReportCard = card;
       reportDialog.showModal();
    };
+   reportButton.onclick = function () {
+      closeMenus();
+      reportDialog.showModal();
+   };
 
+   return card;
    return card;
 }
 
+fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
+   .then((response) => {
+      if (!response.ok) {
+         throw new Error('Ошибка запроса. Статус ' + response.status);
+      }
+
+      return response.json();
+   })
+
+   .then((pins) => {
+      showPins(pins);
+   })
+   .catch((error) => {
+      console.error(error);
+   });
+
 function showPins(pins) {
+   pinsContainer.innerHTML = "";
    pinsContainer.innerHTML = "";
 
    for (const pin of pins) {
       pinsContainer.append(createPin(pin));
    }
+   for (const pin of pins) {
+      pinsContainer.append(createPin(pin));
+   }
 
+   if (pins.length === 0) {
+      pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
+   }
    if (pins.length === 0) {
       pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
    }
@@ -194,9 +290,14 @@ function closeMenus() {
    for (const menu of document.querySelectorAll(".pin-menu")) {
       menu.hidden = true;
    }
+   for (const menu of document.querySelectorAll(".pin-menu")) {
+      menu.hidden = true;
+   }
 }
 
 function searchPins() {
+   const searchText = searchInput.value.toLowerCase();
+   const foundPins = [];
    const searchText = searchInput.value.toLowerCase();
    const foundPins = [];
 
@@ -206,7 +307,14 @@ function searchPins() {
          foundPins.push(pin);
       }
    }
+   for (const pin of pinsData) {
+      const pinText = `${pin.title}${pin.description}${pin.author}${pin.hashtags.join(" ")}`.toLowerCase();
+      if (pinText.includes(searchText)) {
+         foundPins.push(pin);
+      }
+   }
 
+   showPins(foundPins);
    showPins(foundPins);
 }
 
