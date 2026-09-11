@@ -280,25 +280,6 @@ function searchPins() {
 searchInput.oninput = searchPins;
 showPins(pinsData);
 
-const selectBoardBtn = document.getElementById("selectBoardBtn");
-const boardDropdownList = document.getElementById("boardDropdownList");
-
-selectBoardBtn.addEventListener("click", (event) => {
-  event.stopPropagation(); 
-  boardDropdownList.classList.toggle("hidden");
-});
-
-document.addEventListener("click", () => {
-  boardDropdownList.classList.add("hidden");
-});
-
-boardDropdownList.querySelectorAll(".board-dropdown__item").forEach((item) => {
-  item.addEventListener("click", () => {
-    console.log("Выбрана:", item.textContent);
-    boardDropdownList.classList.add("hidden");
-  });
-});
-
 // Назначаем эту функцию в качестве обработчика
 pinsContainer.addEventListener("click", handlePinClick);
 
