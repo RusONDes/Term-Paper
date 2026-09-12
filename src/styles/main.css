@@ -667,3 +667,41 @@ button {
   gap:8px;
 }
 }
+
+.board-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.board-dropdown__btn {
+  cursor: pointer;
+}
+
+.board-dropdown__list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  padding: 8px 0;
+  min-width: 180px;
+  z-index: 100;
+}
+
+.board-dropdown__list.hidden {
+  display: none;
+}
+
+.board-dropdown__item {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.board-dropdown__item:hover {
+  background: #f0f0f0;
+}
