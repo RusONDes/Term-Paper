@@ -14,6 +14,7 @@ const checkIcon = `
 
 const pinsContainer = document.querySelector("#pins");
 const searchInput = document.querySelector("#search");
+let pinsData = [];
 
 const boardModal = document.getElementById("boardModal");
 const closeBoardModalButton = document.getElementById("closeModal");
@@ -242,23 +243,8 @@ fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
    })
 
    .then((pins) => {
-      showPins(pins);
-   })
-   .catch((error) => {
-      console.error(error);
-   });
-
-fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
-   .then((response) => {
-      if (!response.ok) {
-         throw new Error('Ошибка запроса. Статус ' + response.status);
-      }
-
-      return response.json();
-   })
-
-   .then((pins) => {
-      showPins(pins);
+      pinsData = pins;
+      searchPins();
    })
    .catch((error) => {
       console.error(error);
@@ -298,7 +284,6 @@ function searchPins() {
 }
 
 searchInput.oninput = searchPins;
-showPins(pinsData);
 
 const selectBoardBtn = document.getElementById("selectBoardBtn");
 const boardDropdownList = document.getElementById("boardDropdownList");
