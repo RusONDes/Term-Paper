@@ -1,3 +1,10 @@
+import {
+  boards,
+  pinID,
+  handlePinClick,
+  handleDeleteBoard,
+  handleAddPinToBoard,
+} from "./storage.js";
 
 const checkIcon = `
   <svg class="menu-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -14,7 +21,25 @@ const closeBoardModalButton = document.getElementById("closeModal");
 const boardsList = document.getElementById("boardsList");
 const boardInput = document.getElementById("boardInput");
 const createBoardButton = document.getElementById("createBoard");
-const boards = [];
+let boardName;
+//создаём объект структуры доски - возможно вынести из функции???
+// const boardStructure = {
+//   boardName,
+//   listID: [], //сюда будут добавляться ID пинов для прорисовки
+// };
+// let bList = "";
+
+function getBoardList() {
+  boards.length = 0;
+  for (let index = 0; index < localStorage.length; index++) {
+    const elementKey = localStorage.key(index);
+
+    boards.push(localStorage.key(index));
+  }
+  return boards;
+}
+
+console.log(getBoardList());
 
 function updateBoardsList() {
    if (boards.length === 0) {
@@ -24,41 +49,80 @@ function updateBoardsList() {
 
    boardsList.innerHTML = "";
 
-   for (const name of boards) {
-      const board = document.createElement("div");
-      board.className = "board-item";
+  for (const name of boards) {
+    const board = document.createElement("div");
+    board.className = "board-item";
+    board.id = name;
+    board.textContent = `📌 ${name}`;
 
-      const boardName = document.createElement("span");
-      boardName.textContent = `📌 ${name}`;
-      board.append(boardName);
+    // const boardName = document.createElement("p");
+    // const boardName = document.createElement("span");
+    // boardName.textContent = `📌 ${name}`;
+    // board.append(boardName);
 
-      const deleteBoardButton = document.createElement("button");
-      deleteBoardButton.className = "delete-item";
-      deleteBoardButton.textContent = "✕";
-      deleteBoardButton.onclick = function () {
-         const index = boards.indexOf(name);
-         if (index !== -1) {
-            boards.splice(index, 1);
-            updateBoardsList();
-         }
-      };
+    const deleteBoardButton = document.createElement("button");
+    deleteBoardButton.className = "delete-item";
+    deleteBoardButton.textContent = "✕";
+
+    //переписать на отдельную функцию с .removeItem(key)
+    deleteBoardButton.onclick = function () {
+      const index = boards.indexOf(name);
+      if (index !== -1) {
+        boards.splice(index, 1);
+        updateBoardsList();
+      }
+    };
 
       board.append(deleteBoardButton);
       boardsList.append(board);
    }
 }
 
-function createBoard() {
-   const name = boardInput.value.trim();
-   if (!name) {
-      alert("Введите название");
-      return;
-   }
+// function createBoard() {
+//   const name = boardInput.value.trim();
+//   if (!name) {
+//     alert("Введите название");
+//     return;
+//   }
 
-   boards.push(name);
-   boardInput.value = "";
-   boardInput.focus();
-   updateBoardsList();
+//   boards.push(name);
+//   boardInput.value = "";
+//   boardInput.focus();
+//   updateBoardsList();
+// }
+
+function createBoard() {
+  getBoardList();
+
+  boardName = boardInput.value.trim();
+  // const boardName = boardInput.value.trim();
+  if (!boardName) {
+    alert("Пожалуйста, введите название доски!");
+    return;
+  }
+
+  //проверяем существование ключа
+  if (localStorage.getItem(boardName) !== null) {
+    alert(`Доска с названием ${boardName} уже существует!`);
+    boardInput.value = "";
+    return;
+  }
+
+  // //создаём объект структуры доски - возможно вынести из функции???
+  const currentBoardStructure = {
+    boardName,
+    listID: [], //сюда будут добавляться ID пинов для прорисовки
+  };
+
+  //сохраняем структуру в формате JSON
+  localStorage.setItem(boardName, JSON.stringify(currentBoardStructure));
+
+  alert(`Доска ${boardName} успешно создана!`);
+
+  boards.push(boardName);
+  boardInput.value = "";
+  boardInput.focus();
+  updateBoardsList();
 }
 
 function openBoardModal() {
@@ -71,7 +135,8 @@ function closeBoardModal() {
 }
 
 closeBoardModalButton.onclick = closeBoardModal;
-boardModal.onclick = (event) => event.target === boardModal && closeBoardModal();
+boardModal.onclick = (event) =>
+  event.target === boardModal && closeBoardModal();
 createBoardButton.onclick = createBoard;
 
 const cancelButton = document.getElementById("cancel");
@@ -118,7 +183,7 @@ function createPin(pin) {
    card.innerHTML = `
     <div class="photo">
       <img src="${pin.image}" alt="${pin.title}">
-      <button>•••</button>
+      <button class="menuButton">•••</button>
 
       <div class="pin-menu" hidden>
         <button class="save-button">${checkIcon}<span>Добавить на доску</span></button>
@@ -150,10 +215,11 @@ function createPin(pin) {
       menu.hidden = !menuWasClosed;
    };
 
-   saveButton.onclick = function () {
-      closeMenus();
-      openBoardModal();
-   };
+  saveButton.onclick = function () {
+    closeMenus();
+    openBoardModal();
+    console.log(`pinID: ${pinID}`);
+  };
 
    hideButton.onclick = function () {
       card.remove();
@@ -206,12 +272,13 @@ function searchPins() {
    const searchText = searchInput.value.toLowerCase();
    const foundPins = [];
 
-   for (const pin of pinsData) {
-      const pinText = `${pin.title}${pin.description}${pin.author}${pin.hashtags.join(" ")}`.toLowerCase();
-      if (pinText.includes(searchText)) {
-         foundPins.push(pin);
-      }
-   }
+  for (const pin of pinsData) {
+    const pinText =
+      `${pin.title}${pin.description}${pin.author}${pin.hashtags.join(" ")}`.toLowerCase();
+    if (pinText.includes(searchText)) {
+      foundPins.push(pin);
+    }
+  }
 
    showPins(foundPins);
 }
@@ -235,4 +302,22 @@ boardDropdownList.querySelectorAll(".board-dropdown__item").forEach((item) => {
     console.log("Выбрана:", item.textContent);
     boardDropdownList.classList.add("hidden");
   });
+});
+
+// Назначаем эту функцию в качестве обработчика
+pinsContainer.addEventListener("click", handlePinClick);
+
+// Назначаем эту функцию в качестве обработчика
+// Слушаем клик на всем списке досок
+boardsList.addEventListener("click", function (e) {
+  // Если кликнули на кнопку с классом .delete-item
+  if (e.target.closest(".delete-item")) {
+    handleDeleteBoard(e);
+    return;
+  }
+
+  // Если кликнули на кнопку с классом .board-item
+  if (e.target.closest(".board-item")) {
+    handleAddPinToBoard(e);
+  }
 });
