@@ -1,4 +1,3 @@
-import { pinsData } from "./data.js";
 import {
   boards,
   pinID,
@@ -243,38 +242,6 @@ function createPin(pin) {
 
    return card;
 }
-
-fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
-   .then((response) => {
-      if (!response.ok) {
-         throw new Error('Ошибка запроса. Статус ' + response.status);
-      }
-
-      return response.json();
-   })
-
-   .then((pins) => {
-      showPins(pins);
-   })
-   .catch((error) => {
-      console.error(error);
-   });
-
-fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
-   .then((response) => {
-      if (!response.ok) {
-         throw new Error('Ошибка запроса. Статус ' + response.status);
-      }
-
-      return response.json();
-   })
-
-   .then((pins) => {
-      showPins(pins);
-   })
-   .catch((error) => {
-      console.error(error);
-   });
 
 function showPins(pins) {
    pinsContainer.innerHTML = "";
