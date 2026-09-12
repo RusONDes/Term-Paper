@@ -46,6 +46,10 @@ function updateBoardsList() {
       boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
       return;
    }
+   if (boards.length === 0) {
+      boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
+      return;
+   }
 
    boardsList.innerHTML = "";
 
@@ -73,6 +77,9 @@ function updateBoardsList() {
       }
     };
 
+      board.append(deleteBoardButton);
+      boardsList.append(board);
+   }
       board.append(deleteBoardButton);
       boardsList.append(board);
    }
@@ -128,6 +135,8 @@ function createBoard() {
 function openBoardModal() {
    boardModal.showModal();
    updateBoardsList();
+   boardModal.showModal();
+   updateBoardsList();
 }
 
 function closeBoardModal() {
@@ -175,7 +184,11 @@ reportForm.addEventListener("change", function (event) {
 
 function createHashtags(hashtags) {
    let result = "";
+   let result = "";
 
+   for (const hashtag of hashtags) {
+      result += `<span>#${hashtag}</span>`;
+   }
    for (const hashtag of hashtags) {
       result += `<span>#${hashtag}</span>`;
    }
@@ -186,10 +199,16 @@ function createHashtags(hashtags) {
 
 
 function createPin(pin) {
-  const card = document.createElement("article");
-  card.className = "pin";
-  card.id = pin.id;
-  card.innerHTML = `
+   const card = document.createElement("article");
+
+   card.className = "pin";
+   card.id = pin.id;
+   card.innerHTML = `
+   const card = document.createElement("article");
+
+   card.className = "pin";
+   card.id = pin.id;
+   card.innerHTML = `
     <div class="photo">
       <img src="${pin.image}" alt="${pin.title}">
       <button class="menuButton">•••</button>
@@ -294,6 +313,8 @@ function closeMenus() {
 }
 
 function searchPins() {
+   const searchText = searchInput.value.toLowerCase();
+   const foundPins = [];
    const searchText = searchInput.value.toLowerCase();
    const foundPins = [];
 
