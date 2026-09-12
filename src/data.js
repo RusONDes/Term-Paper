@@ -1,90 +1,281 @@
-export const pinsData = [
-  {
-    id: "1",
-    image: "https://picsum.photos/seed/pin1/600/800",
-    title: "Modern interior",
-    description: "Cozy minimalistic living room",
-    avatar: "https://i.pravatar.cc/150?img=1",
-    author: "Anna",
-    hashtags: ["interior", "design", "home"],
-    views: 1240,
-    likes: 185,
-  },
-  {
-    id: "2",
-    image: "https://picsum.photos/seed/pin2/600/900",
-    title: "Travel inspiration",
-    description: "Beautiful place for your next trip",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    author: "Alex",
-    hashtags: ["travel", "nature", "summer"],
-    views: 3580,
-    likes: 420,
-  },
-  {
-    id: "3",
-    image: "https://picsum.photos/seed/pin3/600/700",
-    title: "Street fashion",
-    description: "Casual outfit inspiration",
-    avatar: "https://i.pravatar.cc/150?img=3",
-    author: "Kate",
-    hashtags: ["fashion", "style", "outfit"],
-    views: 890,
-    likes: 97,
-  },
-  {
-    id: "4",
-    image: "https://picsum.photos/seed/pin4/600/850",
-    title: "Morning coffee",
-    description: "Perfect coffee setup for a slow morning",
-    avatar: "https://i.pravatar.cc/150?img=4",
-    author: "Daniel",
-    hashtags: ["coffee", "morning", "lifestyle"],
-    views: 1760,
-    likes: 243,
-  },
-  {
-    id: "5",
-    image: "https://picsum.photos/seed/pin5/600/750",
-    title: "Healthy breakfast",
-    description: "Fresh and colorful breakfast ideas",
-    avatar: "https://i.pravatar.cc/150?img=5",
-    author: "Sophie",
-    hashtags: ["food", "healthy", "breakfast"],
-    views: 2140,
-    likes: 315,
-  },
-  {
-    id: "6",
-    image: "https://picsum.photos/seed/pin6/600/950",
-    title: "Mountain escape",
-    description: "Amazing views from the mountain trail",
-    avatar: "https://i.pravatar.cc/150?img=6",
-    author: "Michael",
-    hashtags: ["mountains", "travel", "adventure"],
-    views: 4620,
-    likes: 578,
-  },
-  {
-    id: "7",
-    image: "https://picsum.photos/seed/pin7/600/800",
-    title: "Creative workspace",
-    description: "Minimal desk setup for productive work",
-    avatar: "https://i.pravatar.cc/150?img=7",
-    author: "Emma",
-    hashtags: ["workspace", "productivity", "design"],
-    views: 1950,
-    likes: 268,
-  },
-  {
-    id: "8",
-    image: "https://picsum.photos/seed/pin8/600/720",
-    title: "City lights",
-    description: "Night atmosphere in the heart of the city",
-    avatar: "https://i.pravatar.cc/150?img=8",
-    author: "Chris",
-    hashtags: ["city", "night", "photography"],
-    views: 3270,
-    likes: 394,
-  },
-];
+[
+   {
+      "id": "1",
+      "image": "./images/interior1.jpg",
+      "title": "Modern interior",
+      "description": "Cozy minimalistic living room",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "design",
+         "home"
+      ]
+   },
+   {
+      "id": "2",
+      "image": "./images/nature1.jpg",
+      "title": "Travel inspiration",
+      "description": "Beautiful place for your next trip",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Alex",
+      "hashtags": [
+         "travel",
+         "nature",
+         "summer"
+      ]
+   },
+   {
+      "id": "3",
+      "image": "./images/woman-fashion1.jpg",
+      "title": "Street fashion",
+      "description": "Casual outfit inspiration",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "woman"
+      ]
+   },
+   {
+      "id": "4",
+      "image": "./images/man-fashion1.jpg",
+      "title": "Man Street fashion",
+      "description": "Casual outfit inspiration for mans",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Daniel",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "man"
+      ]
+   },
+   {
+      "id": "5",
+      "image": "./images/interior-kitchen1.jpg",
+      "title": "Modern kitchen",
+      "description": "Cozy minimalistic kitchen with wooden accents",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "design",
+         "home"
+      ]
+   },
+   {
+      "id": "6",
+      "image": "./images/man-woman-fashion1.jpg",
+      "title": "Couple street style",
+      "description": "Matching outfits for a perfect date",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Kate",
+      "hashtags": [
+         "fashion",
+         "style",
+         "couple",
+         "outfit"
+      ]
+   },
+   {
+      "id": "7",
+      "image": "./images/nature-mountains1.jpg",
+      "title": "Mountain sunrise",
+      "description": "Breathtaking view from the top of the world",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Michael",
+      "hashtags": [
+         "nature",
+         "mountains",
+         "travel",
+         "sunrise"
+      ]
+   },
+   {
+      "id": "8",
+      "image": "./images/nature2.jpg",
+      "title": "Sunset",
+      "description": "Peaceful sky",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Eva",
+      "hashtags": [
+         "nature",
+         "forest",
+         "lake",
+         "relax"
+      ]
+   },
+   {
+      "id": "9",
+      "image": "./images/woman-fashion2.jpg",
+      "title": "Street fashion",
+      "description": "Casual outfit inspiration for women",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "woman"
+      ]
+   },
+   {
+      "id": "10",
+      "image": "./images/man-fashion2.jpg",
+      "title": "Man street fashion",
+      "description": "Casual outfit inspiration for men",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "man"
+      ]
+   },
+   {
+      "id": "11",
+      "image": "./images/interior-kitchen2.jpg",
+      "title": "Scandinavian kitchen",
+      "description": "Light and airy kitchen with white cabinets",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Sofia",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "scandinavian",
+         "minimalism"
+      ]
+   },
+   {
+      "id": "12",
+      "image": "./images/man-woman-fashion2.jpg",
+      "title": "Autumn look",
+      "description": "Warm and stylish autumn outfit ideas",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Daniel",
+      "hashtags": [
+         "fashion",
+         "autumn",
+         "style",
+         "man",
+         "woman"
+      ]
+   },
+   {
+      "id": "13",
+      "image": "./images/interior2.jpg",
+      "title": "Cozy living room",
+      "description": "Warm and inviting space with soft lighting",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "living room",
+         "cozy",
+         "design"
+      ]
+   },
+   {
+      "id": "14",
+      "image": "./images/man-woman-fashion3.jpg",
+      "title": "Urban fashion",
+      "description": "Trendy streetwear for everyday",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Alex",
+      "hashtags": [
+         "fashion",
+         "urban",
+         "streetwear",
+         "style"
+      ]
+   },
+   {
+      "id": "15",
+      "image": "./images/nature-mountains2.jpg",
+      "title": "Snowy peaks",
+      "description": "Winter adventure in the high mountains",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Elena",
+      "hashtags": [
+         "nature",
+         "mountains",
+         "winter",
+         "adventure"
+      ]
+   },
+   {
+      "id": "16",
+      "image": "./images/interior3.jpg",
+      "title": "Minimalist bedroom",
+      "description": "Calm and clean bedroom design",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Sofia",
+      "hashtags": [
+         "interior",
+         "bedroom",
+         "minimalism",
+         "home"
+      ]
+   },
+   {
+      "id": "17",
+      "image": "./images/nature3.jpg",
+      "title": "Golden field",
+      "description": "Endless field at sunset",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "nature",
+         "field",
+         "sunset",
+         "summer"
+      ]
+   },
+   {
+      "id": "18",
+      "image": "./images/woman-fashion4.jpg",
+      "title": "Spring outfit",
+      "description": "Fresh and colorful spring look",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "fashion",
+         "spring",
+         "style",
+         "woman"
+      ]
+   },
+   {
+      "id": "19",
+      "image": "./images/interior-kitchen3.jpg",
+      "title": "Scandinavian kitchen",
+      "description": "Light and airy kitchen with white cabinets",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Michael",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "scandinavian",
+         "minimalism"
+      ]
+   },
+   {
+      "id": "20",
+      "image": "./images/woman-fashion3.jpg",
+      "title": "Elegant evening look",
+      "description": "Sophisticated dress for a special night",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Maria",
+      "hashtags": [
+         "fashion",
+         "elegant",
+         "dress",
+         "woman"
+      ]
+   }
+]
