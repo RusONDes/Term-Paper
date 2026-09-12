@@ -150,15 +150,6 @@ cancelButton.addEventListener("click", function () {
    reportDialog.close();
 });
 
-let currentReportCard = null;
-
-nextButton.addEventListener('click', function () {
-   currentReportCard.remove();
-   reportForm.reset();
-   nextButton.disabled = true;
-   reportDialog.close();
-});
-
 
 claimScroll.addEventListener("scroll", function () {
    const hasScrollOffset = claimScroll.scrollTop > 0;
@@ -186,7 +177,6 @@ function createHashtags(hashtags) {
 
 function createPin(pin) {
    const card = document.createElement("article");
-
    card.className = "pin";
    card.id = pin.id;
    card.innerHTML = `
@@ -236,12 +226,43 @@ function createPin(pin) {
 
    reportButton.onclick = function () {
       closeMenus();
-      currentReportCard = card;
       reportDialog.showModal();
    };
 
    return card;
 }
+
+fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
+   .then((response) => {
+      if (!response.ok) {
+         throw new Error('Ошибка запроса. Статус ' + response.status);
+      }
+
+      return response.json();
+   })
+
+   .then((pins) => {
+      showPins(pins);
+   })
+   .catch((error) => {
+      console.error(error);
+   });
+
+fetch('https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins')
+   .then((response) => {
+      if (!response.ok) {
+         throw new Error('Ошибка запроса. Статус ' + response.status);
+      }
+
+      return response.json();
+   })
+
+   .then((pins) => {
+      showPins(pins);
+   })
+   .catch((error) => {
+      console.error(error);
+   });
 
 function showPins(pins) {
    pinsContainer.innerHTML = "";
