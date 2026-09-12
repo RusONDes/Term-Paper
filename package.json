@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/RusONDes/Term-Paper.git"
   },
-  "keywords": ["pinterest", "parcel", "course-project"],
+  "keywords": [
+    "pinterest",
+    "parcel",
+    "course-project"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
