@@ -1,182 +1,281 @@
-export const pinsData = [
+[
    {
-      id: "1",
-      image: "./images/interior1.jpg",
-      title: "Modern interior",
-      description: "Cozy minimalistic living room",
-      avatar: "./images/avatar-arwen.jpg",
-      author: "Anna",
-      hashtags: ["interior", "design", "home"],
+      "id": "1",
+      "image": "./images/interior1.jpg",
+      "title": "Modern interior",
+      "description": "Cozy minimalistic living room",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "design",
+         "home"
+      ]
    },
    {
-      id: "2",
-      image: "./images/nature1.jpg",
-      title: "Travel inspiration",
-      description: "Beautiful place for your next trip",
-      avatar: "./images/avatar-bellucci.jpg",
-      author: "Alex",
-      hashtags: ["travel", "nature", "summer"],
+      "id": "2",
+      "image": "./images/nature1.jpg",
+      "title": "Travel inspiration",
+      "description": "Beautiful place for your next trip",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Alex",
+      "hashtags": [
+         "travel",
+         "nature",
+         "summer"
+      ]
    },
    {
-      id: "3",
-      image: "./images/woman-fashion1.jpg",
-      title: "Street fashion",
-      description: "Casual outfit inspiration",
-      avatar: "./images/avatar-Kit-Harington.jpg",
-      author: "Kit",
-      hashtags: ["fashion", "style", "outfit", "woman"],
+      "id": "3",
+      "image": "./images/woman-fashion1.jpg",
+      "title": "Street fashion",
+      "description": "Casual outfit inspiration",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "woman"
+      ]
    },
    {
-      id: "4",
-      image: "./images/man-fashion1.jpg",
-      title: "Man Street fashion",
-      description: "Casual outfit inspiration for mans",
-      avatar: "./images/avatar-louis-hofmann.jpg",
-      author: "Daniel",
-      hashtags: ["fashion", "style", "outfit", "man"],
+      "id": "4",
+      "image": "./images/man-fashion1.jpg",
+      "title": "Man Street fashion",
+      "description": "Casual outfit inspiration for mans",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Daniel",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "man"
+      ]
    },
    {
-      id: "5",
-      image: "./images/interior-kitchen1.jpg",
-      title: "Modern kitchen",
-      description: "Cozy minimalistic kitchen with wooden accents",
-      avatar: "./images/avatar-laetitia-casta.jpg",
-      author: "Anna",
-      hashtags: ["interior", "kitchen", "design", "home"],
+      "id": "5",
+      "image": "./images/interior-kitchen1.jpg",
+      "title": "Modern kitchen",
+      "description": "Cozy minimalistic kitchen with wooden accents",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "design",
+         "home"
+      ]
    },
    {
-      id: "6",
-      image: "./images/man-woman-fashion1.jpg",
-      title: "Couple street style",
-      description: "Matching outfits for a perfect date",
-      avatar: "./images/avatar-arwen.jpg",
-      author: "Kate",
-      hashtags: ["fashion", "style", "couple", "outfit"],
+      "id": "6",
+      "image": "./images/man-woman-fashion1.jpg",
+      "title": "Couple street style",
+      "description": "Matching outfits for a perfect date",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Kate",
+      "hashtags": [
+         "fashion",
+         "style",
+         "couple",
+         "outfit"
+      ]
    },
    {
-      id: "7",
-      image: "./images/nature-mountains1.jpg",
-      title: "Mountain sunrise",
-      description: "Breathtaking view from the top of the world",
-      avatar: "./images/avatar-louis-hofmann.jpg",
-      author: "Michael",
-      hashtags: ["nature", "mountains", "travel", "sunrise"],
+      "id": "7",
+      "image": "./images/nature-mountains1.jpg",
+      "title": "Mountain sunrise",
+      "description": "Breathtaking view from the top of the world",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Michael",
+      "hashtags": [
+         "nature",
+         "mountains",
+         "travel",
+         "sunrise"
+      ]
    },
    {
-      id: "8",
-      image: "./images/nature2.jpg",
-      title: "Sunset",
-      description: "Peaceful sky",
-      avatar: "./images/avatar-bellucci.jpg",
-      author: "Eva",
-      hashtags: ["nature", "forest", "lake", "relax"],
+      "id": "8",
+      "image": "./images/nature2.jpg",
+      "title": "Sunset",
+      "description": "Peaceful sky",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Eva",
+      "hashtags": [
+         "nature",
+         "forest",
+         "lake",
+         "relax"
+      ]
    },
    {
-      id: "9",
-      image: "./images/woman-fashion2.jpg",
-      title: "Street fashion",
-      description: "Casual outfit inspiration for women",
-      avatar: "./images/avatar-Kit-Harington.jpg",
-      author: "Kit",
-      hashtags: ["fashion", "style", "outfit", "woman"],
+      "id": "9",
+      "image": "./images/woman-fashion2.jpg",
+      "title": "Street fashion",
+      "description": "Casual outfit inspiration for women",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "woman"
+      ]
    },
    {
-      id: "10",
-      image: "./images/man-fashion2.jpg",
-      title: "Man street fashion",
-      description: "Casual outfit inspiration for men",
-      avatar: "./images/avatar-laetitia-casta.jpg",
-      author: "Anna",
-      hashtags: ["fashion", "style", "outfit", "man"],
+      "id": "10",
+      "image": "./images/man-fashion2.jpg",
+      "title": "Man street fashion",
+      "description": "Casual outfit inspiration for men",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "fashion",
+         "style",
+         "outfit",
+         "man"
+      ]
    },
    {
-      id: "11",
-      image: "./images/interior-kitchen2.jpg",
-      title: "Scandinavian kitchen",
-      description: "Light and airy kitchen with white cabinets",
-      avatar: "./images/avatar-arwen.jpg",
-      author: "Sofia",
-      hashtags: ["interior", "kitchen", "scandinavian", "minimalism"],
+      "id": "11",
+      "image": "./images/interior-kitchen2.jpg",
+      "title": "Scandinavian kitchen",
+      "description": "Light and airy kitchen with white cabinets",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Sofia",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "scandinavian",
+         "minimalism"
+      ]
    },
    {
-      id: "12",
-      image: "./images/man-woman-fashion2.jpg",
-      title: "Autumn look",
-      description: "Warm and stylish autumn outfit ideas",
-      avatar: "./images/avatar-louis-hofmann.jpg",
-      author: "Daniel",
-      hashtags: ["fashion", "autumn", "style", "man", "woman"],
+      "id": "12",
+      "image": "./images/man-woman-fashion2.jpg",
+      "title": "Autumn look",
+      "description": "Warm and stylish autumn outfit ideas",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Daniel",
+      "hashtags": [
+         "fashion",
+         "autumn",
+         "style",
+         "man",
+         "woman"
+      ]
    },
    {
-      id: "13",
-      image: "./images/interior2.jpg",
-      title: "Cozy living room",
-      description: "Warm and inviting space with soft lighting",
-      avatar: "./images/avatar-bellucci.jpg",
-      author: "Anna",
-      hashtags: ["interior", "living room", "cozy", "design"],
+      "id": "13",
+      "image": "./images/interior2.jpg",
+      "title": "Cozy living room",
+      "description": "Warm and inviting space with soft lighting",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "interior",
+         "living room",
+         "cozy",
+         "design"
+      ]
    },
    {
-      id: "14",
-      image: "./images/man-woman-fashion3.jpg",
-      title: "Urban fashion",
-      description: "Trendy streetwear for everyday",
-      avatar: "./images/avatar-Kit-Harington.jpg",
-      author: "Alex",
-      hashtags: ["fashion", "urban", "streetwear", "style"],
+      "id": "14",
+      "image": "./images/man-woman-fashion3.jpg",
+      "title": "Urban fashion",
+      "description": "Trendy streetwear for everyday",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Alex",
+      "hashtags": [
+         "fashion",
+         "urban",
+         "streetwear",
+         "style"
+      ]
    },
    {
-      id: "15",
-      image: "./images/nature-mountains2.jpg",
-      title: "Snowy peaks",
-      description: "Winter adventure in the high mountains",
-      avatar: "./images/avatar-laetitia-casta.jpg",
-      author: "Elena",
-      hashtags: ["nature", "mountains", "winter", "adventure"],
+      "id": "15",
+      "image": "./images/nature-mountains2.jpg",
+      "title": "Snowy peaks",
+      "description": "Winter adventure in the high mountains",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Elena",
+      "hashtags": [
+         "nature",
+         "mountains",
+         "winter",
+         "adventure"
+      ]
    },
    {
-      id: "16",
-      image: "./images/interior3.jpg",
-      title: "Minimalist bedroom",
-      description: "Calm and clean bedroom design",
-      avatar: "./images/avatar-arwen.jpg",
-      author: "Sofia",
-      hashtags: ["interior", "bedroom", "minimalism", "home"],
+      "id": "16",
+      "image": "./images/interior3.jpg",
+      "title": "Minimalist bedroom",
+      "description": "Calm and clean bedroom design",
+      "avatar": "./images/avatar-arwen.jpg",
+      "author": "Sofia",
+      "hashtags": [
+         "interior",
+         "bedroom",
+         "minimalism",
+         "home"
+      ]
    },
    {
-      id: "17",
-      image: "./images/nature3.jpg",
-      title: "Golden field",
-      description: "Endless field at sunset",
-      avatar: "./images/avatar-Kit-Harington.jpg",
-      author: "Kit",
-      hashtags: ["nature", "field", "sunset", "summer"],
+      "id": "17",
+      "image": "./images/nature3.jpg",
+      "title": "Golden field",
+      "description": "Endless field at sunset",
+      "avatar": "./images/avatar-Kit-Harington.jpg",
+      "author": "Kit",
+      "hashtags": [
+         "nature",
+         "field",
+         "sunset",
+         "summer"
+      ]
    },
    {
-      id: "18",
-      image: "./images/woman-fashion4.jpg",
-      title: "Spring outfit",
-      description: "Fresh and colorful spring look",
-      avatar: "./images/avatar-bellucci.jpg",
-      author: "Anna",
-      hashtags: ["fashion", "spring", "style", "woman"],
+      "id": "18",
+      "image": "./images/woman-fashion4.jpg",
+      "title": "Spring outfit",
+      "description": "Fresh and colorful spring look",
+      "avatar": "./images/avatar-bellucci.jpg",
+      "author": "Anna",
+      "hashtags": [
+         "fashion",
+         "spring",
+         "style",
+         "woman"
+      ]
    },
    {
-      id: "19",
-      image: "./images/interior-kitchen3.jpg",
-      title: "Scandinavian kitchen",
-      description: "Light and airy kitchen with white cabinets",
-      avatar: "./images/avatar-louis-hofmann.jpg",
-      author: "Michael",
-      hashtags: ["interior", "kitchen", "scandinavian", "minimalism"],
+      "id": "19",
+      "image": "./images/interior-kitchen3.jpg",
+      "title": "Scandinavian kitchen",
+      "description": "Light and airy kitchen with white cabinets",
+      "avatar": "./images/avatar-louis-hofmann.jpg",
+      "author": "Michael",
+      "hashtags": [
+         "interior",
+         "kitchen",
+         "scandinavian",
+         "minimalism"
+      ]
    },
    {
-      id: "20",
-      image: "./images/woman-fashion3.jpg",
-      title: "Elegant evening look",
-      description: "Sophisticated dress for a special night",
-      avatar: "./images/avatar-laetitia-casta.jpg",
-      author: "Maria",
-      hashtags: ["fashion", "elegant", "dress", "woman"],
-   },
-];
+      "id": "20",
+      "image": "./images/woman-fashion3.jpg",
+      "title": "Elegant evening look",
+      "description": "Sophisticated dress for a special night",
+      "avatar": "./images/avatar-laetitia-casta.jpg",
+      "author": "Maria",
+      "hashtags": [
+         "fashion",
+         "elegant",
+         "dress",
+         "woman"
+      ]
+   }
+]
