@@ -42,12 +42,12 @@ function getBoardList() {
 console.log(getBoardList());
 
 function updateBoardsList() {
-  if (boards.length === 0) {
-    boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
-    return;
-  }
+   if (boards.length === 0) {
+      boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
+      return;
+   }
 
-  boardsList.innerHTML = "";
+   boardsList.innerHTML = "";
 
   for (const name of boards) {
     const board = document.createElement("div");
@@ -73,9 +73,9 @@ function updateBoardsList() {
       }
     };
 
-    board.append(deleteBoardButton);
-    boardsList.append(board);
-  }
+      board.append(deleteBoardButton);
+      boardsList.append(board);
+   }
 }
 
 // function createBoard() {
@@ -126,12 +126,12 @@ function createBoard() {
 }
 
 function openBoardModal() {
-  boardModal.showModal();
-  updateBoardsList();
+   boardModal.showModal();
+   updateBoardsList();
 }
 
 function closeBoardModal() {
-  boardModal.close();
+   boardModal.close();
 }
 
 closeBoardModalButton.onclick = closeBoardModal;
@@ -148,36 +148,49 @@ const nextButton = document.getElementById("nextButton");
 const reportForm = document.querySelector("#reportDialog form");
 
 cancelButton.addEventListener("click", function () {
-  reportDialog.close();
+   reportDialog.close();
 });
 
+let currentReportCard = null;
+
+nextButton.addEventListener('click', function () {
+   currentReportCard.remove();
+   reportForm.reset();
+   nextButton.disabled = true;
+   reportDialog.close();
+});
+
+
 claimScroll.addEventListener("scroll", function () {
-  const hasScrollOffset = claimScroll.scrollTop > 0;
-  claimHeader.classList.toggle("shadow", hasScrollOffset);
-  claimActions.classList.toggle("shadow", hasScrollOffset);
+   const hasScrollOffset = claimScroll.scrollTop > 0;
+   claimHeader.classList.toggle("shadow", hasScrollOffset);
+   claimActions.classList.toggle("shadow", hasScrollOffset);
 });
 
 reportForm.addEventListener("change", function (event) {
-  if (event.target.matches('input[type="radio"]')) {
-    nextButton.disabled = false;
-  }
+   if (event.target.matches('input[type="radio"]')) {
+      nextButton.disabled = false;
+   }
 });
 
 function createHashtags(hashtags) {
-  let result = "";
+   let result = "";
 
-  for (const hashtag of hashtags) {
-    result += `<span>#${hashtag}</span>`;
-  }
+   for (const hashtag of hashtags) {
+      result += `<span>#${hashtag}</span>`;
+   }
 
-  return result;
+   return result;
 }
 
+
+
 function createPin(pin) {
-  const card = document.createElement("article");
-  card.className = "pin";
-  card.id = pin.id;
-  card.innerHTML = `
+   const card = document.createElement("article");
+
+   card.className = "pin";
+   card.id = pin.id;
+   card.innerHTML = `
     <div class="photo">
       <img src="${pin.image}" alt="${pin.title}">
       <button class="menuButton">•••</button>
@@ -200,17 +213,17 @@ function createPin(pin) {
     </div>
   `;
 
-  const menu = card.querySelector(".pin-menu");
-  const menuButton = card.querySelector(".photo > button");
-  const saveButton = card.querySelector(".save-button");
-  const hideButton = card.querySelector(".hide-button");
-  const reportButton = card.querySelector(".report-button");
+   const menu = card.querySelector(".pin-menu");
+   const menuButton = card.querySelector(".photo > button");
+   const saveButton = card.querySelector(".save-button");
+   const hideButton = card.querySelector(".hide-button");
+   const reportButton = card.querySelector(".report-button");
 
-  menuButton.onclick = function () {
-    const menuWasClosed = menu.hidden;
-    closeMenus();
-    menu.hidden = !menuWasClosed;
-  };
+   menuButton.onclick = function () {
+      const menuWasClosed = menu.hidden;
+      closeMenus();
+      menu.hidden = !menuWasClosed;
+   };
 
   saveButton.onclick = function () {
     closeMenus();
@@ -218,39 +231,40 @@ function createPin(pin) {
     console.log(`pinID: ${pinID}`);
   };
 
-  hideButton.onclick = function () {
-    card.remove();
-  };
+   hideButton.onclick = function () {
+      card.remove();
+   };
 
-  reportButton.onclick = function () {
-    closeMenus();
-    reportDialog.showModal();
-  };
+   reportButton.onclick = function () {
+      closeMenus();
+      currentReportCard = card;
+      reportDialog.showModal();
+   };
 
-  return card;
+   return card;
 }
 
 function showPins(pins) {
-  pinsContainer.innerHTML = "";
+   pinsContainer.innerHTML = "";
 
-  for (const pin of pins) {
-    pinsContainer.append(createPin(pin));
-  }
+   for (const pin of pins) {
+      pinsContainer.append(createPin(pin));
+   }
 
-  if (pins.length === 0) {
-    pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
-  }
+   if (pins.length === 0) {
+      pinsContainer.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
+   }
 }
 
 function closeMenus() {
-  for (const menu of document.querySelectorAll(".pin-menu")) {
-    menu.hidden = true;
-  }
+   for (const menu of document.querySelectorAll(".pin-menu")) {
+      menu.hidden = true;
+   }
 }
 
 function searchPins() {
-  const searchText = searchInput.value.toLowerCase();
-  const foundPins = [];
+   const searchText = searchInput.value.toLowerCase();
+   const foundPins = [];
 
   for (const pin of pinsData) {
     const pinText =
@@ -260,11 +274,30 @@ function searchPins() {
     }
   }
 
-  showPins(foundPins);
+   showPins(foundPins);
 }
 
 searchInput.oninput = searchPins;
 showPins(pinsData);
+
+const selectBoardBtn = document.getElementById("selectBoardBtn");
+const boardDropdownList = document.getElementById("boardDropdownList");
+
+selectBoardBtn.addEventListener("click", (event) => {
+  event.stopPropagation(); 
+  boardDropdownList.classList.toggle("hidden");
+});
+
+document.addEventListener("click", () => {
+  boardDropdownList.classList.add("hidden");
+});
+
+boardDropdownList.querySelectorAll(".board-dropdown__item").forEach((item) => {
+  item.addEventListener("click", () => {
+    console.log("Выбрана:", item.textContent);
+    boardDropdownList.classList.add("hidden");
+  });
+});
 
 // Назначаем эту функцию в качестве обработчика
 pinsContainer.addEventListener("click", handlePinClick);

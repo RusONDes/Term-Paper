@@ -35,8 +35,18 @@
           />
         </form>
 
-        <button>Выбрать доску <span>▼</span></button>
-      </header>
+      <div class="board-dropdown">
+  <button id="selectBoardBtn" class="board-dropdown__btn">
+    Выбрать доску <span>▼</span>
+  </button>
+  <ul id="boardDropdownList" class="board-dropdown__list hidden">
+    <li class="board-dropdown__item">Доска 1</li>
+    <li class="board-dropdown__item">Доска 2</li>
+    <li class="board-dropdown__item">Доска 3</li>
+  </ul>
+</div>
+
+    </header>
 
       <section id="pins" class="pins" aria-label="Лента публикаций"></section>
 
