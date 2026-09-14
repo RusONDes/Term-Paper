@@ -1,7 +1,35 @@
-export const boards = [];
+// работа с LocalStorage
+
+// ключ для localStorage
+export const boardsStorageKey = "boards";
+
+export const boardsLS = [];
 export let pinID;
 
-// 1. Создаем отдельную функцию для обработки клика на menuButton
+// функция для полученния данных из localSrorage
+export function getData() {
+  const boardsFromStorage = localStorage.getItem(boardsStorageKey);
+
+  if (!boardsFromStorage) {
+    console.log(`Parsing error: ключ не найден`);
+    return [];
+  }
+
+  try {
+    // console.log(JSON.parse(boardsFromStorage));
+    return JSON.parse(boardsFromStorage);
+  } catch (error) {
+    console.log("Parsing error:", error);
+    return [];
+  }
+}
+
+// функция для записи данных в LocalStorage
+export function setData(board) {
+  localStorage.setItem(boardsStorageKey, JSON.stringify(board));
+}
+
+// функция для обработки клика по menuButton
 export function handlePinClick(e) {
   // Ищем кнопку
   const menuButton = e.target.closest(".menuButton");
@@ -19,80 +47,95 @@ export function handlePinClick(e) {
 
   // Проверяем найденный id
   pinID = parent.id;
-  console.log(`pinID: ${pinID}`);
+  // console.log(`pinID: ${pinID}`);
 }
 
-//функция для добавления ПИНа на доску (по аналогии с handlePinClick)
+// функция для добавления ПИНа на доску (по аналогии с handlePinClick)
 export function handleAddPinToBoard(e) {
-  // Ищем кнопку
+  // ищем кнопку
   const boarditem = e.target.closest(".board-item");
 
-  // Проверяем найденный id
+  // проверяем найденный id
   const boardName = boarditem.id;
-  // pinID = parent.id;
-  console.log(`boardName: ${boarditem.id}`);
-  console.log(`pinID: ${pinID}`);
+  // console.log(`boardName: ${boarditem.id}`);
+  // console.log(`pinID: ${pinID}`);
 
-  const boardData = localStorage.getItem(boardName);
+  // получаем список досок при загрузке страницы
+  const boardListLS = getData();
+  // console.log(`boardListLS: ${boardListLS}`);
+  // console.log("boardListLS:", boardListLS);
 
-  if (!boardData) {
-    alert(`Доска не найдена!`);
-    return [];
+  // ищем объект, у которого boardName равен  выбранному boardName
+  const targetBoard = boardListLS.find((item) => item.boardName === boardName);
+
+  // проверяем, нашли ли мы доску и есть ли в её listID выбранный ПИН
+  const hasValue = targetBoard ? targetBoard.listID.includes(pinID) : false;
+
+  // console.log(hasValue); // true
+
+  // проверяем существует выбранный ПИН на выбранной доске. Если да - выдаём alert и прерываем выполнение
+  if (hasValue) {
+    alert(`Пин уже существует на доске ${boardName}`);
+    return;
   }
 
-  try {
-    const currentBoardData = JSON.parse(boardData);
+  // добавляем выбранный ПИН на выбранную доску (если ранее не нашли ПИН на доске)
+  targetBoard.listID.push(pinID);
+  // console.log("Обновленная структура доски:", targetBoard);
+  // console.log(`Обновленная структура доски ${boardName}:", ${targetBoard}`);
+  // СОХРАНЕНИЕ В LOCALSTORAGE:
+  // передаем весь обновленный массив в вашу функцию setData
+  localStorage.setItem(boardsStorageKey, JSON.stringify(boardListLS));
 
-    // Проверяем, существует ли в объекте массив listID. Если нет — создаем его.
-    if (!currentBoardData.listID) {
-      currentBoardData.listID = [];
-    }
-
-    //добавляем выбранный ПИН на выбранную доску
-    currentBoardData.listID.push(pinID);
-    console.log("Обновленная структура доски:", currentBoardData);
-
-    //сохраняем структуру в формате JSON
-    localStorage.setItem(boardName, JSON.stringify(currentBoardData));
-
-    alert(`Пин успешно добавлен на доску!`);
-  } catch (error) {
-    console.error("Ошибка при парсинге JSON или сохранении:", error);
-    return [];
-  }
+  alert(`Пин ${pinID} успешно добавлен на доску ${boardName}!`);
 }
 
-//функция для удаления доски (по аналогии с handlePinClick)
+// функция для удаления доски (по аналогии с handlePinClick)
 export function handleDeleteBoard(e) {
-  // Ищем кнопку
+  // ищем кнопку
   const deleteitem = e.target.closest(".delete-item");
 
-  // Защита: если кликнули мимо или элемент не найден, выходим из функции
+  // если кликнули мимо или элемент не найден, выходим из функции
   if (!deleteitem) {
     console.error("Элемент .delete-item не найден");
     return;
   }
 
-  //находим ближайшего родителя
+  // находим ближайшего родителя
   const parent = deleteitem.closest(".board-item");
-  //не нашли родителя - выходим
+  // не нашли родителя - выходим
   if (!parent) {
+    console.error("Родительский элемент .board-item не найден в DOM");
     return;
   }
 
-  // Проверяем найденный id
+  // проверяем найденный id
   const boardName = parent.id;
-  console.log(`boardName: ${parent.id}`);
+  // console.log(`boardName: ${parent.id}`);
 
-  if (!localStorage.getItem(boardName)) {
-    // if (!boardData) {
+  // получаем список досок при загрузке страницы
+  const boardListLS = getData();
+
+  // ищем объект, у которого boardName равен id доски
+  const targetBoard = boardListLS.find((item) => item.boardName === boardName);
+
+  // проверяем, нашли ли мы доску и есть ли в её listID наш id
+  if (!targetBoard) {
     alert(`Доска не найдена!`);
     return;
   }
 
-  //удаляем найденного родителя
+  // фильтруем массив, оставляя все доски, КРОМЕ удаляемой
+  const updatedBoardsList = boardListLS.filter(
+    (item) => item.boardName !== boardName,
+  );
+
+  // сохраняем в LS
+  localStorage.setItem(boardsStorageKey, JSON.stringify(updatedBoardsList));
+
+  // логируем и удаляем элемент из HTML
+  // console.log("Удаляем из HTML элемент:", parent);
   parent.remove();
 
-  localStorage.removeItem(boardName);
-  alert(`Доска удалена!`);
+  alert(`Доска "${boardName}" успешно удалена!`);
 }
