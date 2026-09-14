@@ -9,7 +9,12 @@
   <body>
     <main class="container">
       <header class="header">
-        <a class="logo" href="#" aria-label="Pinterest, на главную">
+        <a
+          class="logo"
+          id="mainLogo"
+          href="#"
+          aria-label="Pinterest, на главную"
+        >
           <svg
             class="logo-svg"
             aria-hidden="true"
@@ -35,18 +40,17 @@
           />
         </form>
 
-      <div class="board-dropdown">
-  <button id="selectBoardBtn" class="board-dropdown__btn">
-    Выбрать доску <span>▼</span>
-  </button>
-  <ul id="boardDropdownList" class="board-dropdown__list hidden">
-    <li class="board-dropdown__item">Доска 1</li>
-    <li class="board-dropdown__item">Доска 2</li>
-    <li class="board-dropdown__item">Доска 3</li>
-  </ul>
-</div>
-
-    </header>
+        <div class="board-dropdown">
+          <button id="selectBoardBtn" class="board-dropdown__btn">
+            Выбрать доску <span>▼</span>
+          </button>
+          <ul id="boardDropdownList" class="board-dropdown__list hidden">
+            <!-- <li class="board-dropdown__item">Доска 1</li>
+            <li class="board-dropdown__item">Доска 2</li>
+            <li class="board-dropdown__item">Доска 3</li> -->
+          </ul>
+        </div>
+      </header>
 
       <section id="pins" class="pins" aria-label="Лента публикаций"></section>
 
