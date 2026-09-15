@@ -1,8 +1,6 @@
 import {
   boardsStorageKey,
-  pinID,
   getData,
-  setData,
   handlePinClick,
   handleDeleteBoard,
   handleAddPinToBoard,
@@ -44,21 +42,13 @@ fetch("https://6aa264b7ccb3db9689a66f26.mockapi.io/api/pins")
 function showPinsForBoard(targetBoard) {
   // проверяем, загрузились ли уже пины с сервера
   if (pinsData.length === 0) {
-    console.warn("Данные еще не загрузились или массив пуст");
     return;
   }
-
-  console.log(
-    `Фильтруем пины для доски: ${targetBoard.name || "Выбранная доска"}`,
-  );
 
   // фильтруем массив всех пинов, оставляя только те, чьи ID есть в targetBoard.listID
   const filteredPins = pinsData.filter((pin) => {
     return targetBoard.listID.map(String).includes(String(pin.id));
   });
-
-  // выводим результат в консоль (или передаем в функцию отрисовки интерфейса)
-  console.log("Пины для выбранной доски:", filteredPins);
 
   // отрисовываем ПИНы с выбранной доски
   showPins(filteredPins);
@@ -82,16 +72,13 @@ function getBoardList() {
   boardListLS = getData();
 
   boards = boardListLS.map((item) => item.boardName);
-  // console.log(`1: ${boards}`);
 
   return boards;
 }
 
 function updateBoardsList() {
   boards = [];
-  // console.log(`2: ${boards}`);
   boards = getBoardList();
-  // console.log(`3: ${boards}`);
 
   if (boards.length === 0) {
     boardsList.innerHTML = '<p class="empty">Пока досок нет</p>';
@@ -241,7 +228,6 @@ function createPin(pin) {
   saveButton.onclick = function () {
     closeMenus();
     openBoardModal();
-    // console.log(`pinID: ${pinID}`);
   };
 
   hideButton.onclick = function () {
@@ -301,10 +287,7 @@ const boardDropdownList = document.getElementById("boardDropdownList");
 // функция для заполнения списка досок в выпадающем списке
 function updateDropdownList() {
   boards = [];
-  // console.log(`2: ${boards}`);
   boards = getBoardList();
-  // console.log(`3: ${boards}`);
-  // console.log("4: ", getBoardList());
 
   if (boards.length === 0) {
     boardDropdownList.innerHTML = '<p class="empty">Пока досок нет</p>';
@@ -321,18 +304,14 @@ function updateDropdownList() {
 
     // подставляем boardName из объекта (например: "Доска 2", "Доска 3")
     li.textContent = board;
-    // console.log(board);
 
     // записываем ID доски в специальный дата-атрибут data-id
     // li.dataset.id = board.listID;
-    // console.log(board.listID);
 
     // добавляем созданный li внутрь ul
     boardDropdownList.appendChild(li);
   });
 
-  // console.log(boards);
-  // console.log(board);
 }
 
 // вешаем обработчик событий на кнопку выпадающего списка
@@ -356,9 +335,6 @@ boardDropdownList.addEventListener("click", (e) => {
   // получаем текст из кликнутого элемента li
   const boardName = clickedItem.textContent.trim();
 
-  // выводим результат в консоль
-  console.log("Выбрана доска:", boardName);
-
   // ищем объект, у которого boardName равен id доски
   const targetBoard = getData().find((item) => item.boardName === boardName);
 
@@ -372,22 +348,7 @@ boardDropdownList.addEventListener("click", (e) => {
 
   // получаем ID доски из дата-атрибута
   // const boardId = clickedItem.dataset.id;
-  const boardId = targetBoard.listID;
-  console.log("boardId", boardId);
-
-  // Выводим данные в консоль
-  console.log("Вы кликнули по доске:", targetBoard);
-  console.log("listID выбранной доски:", targetBoard.listID);
-  // записать targetBoard.listID в переменную
-  // прогнать переменную циклом для поиска записей по id и отрисовке ПИНов функцией
-  console.log(pinsData);
   showPinsForBoard(targetBoard);
-
-  // находим нужные пины и отрисовываем хи на странице
-  for (let i = 0; i < targetBoard.listID.length; i++) {
-    console.log(targetBoard.listID[i]);
-    // showPinsForBoard(targetBoard);
-  }
 });
 
 // скрываем выпадающий список по любому клику на странице
