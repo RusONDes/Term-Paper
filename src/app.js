@@ -176,6 +176,22 @@ reportForm.addEventListener("change", function (event) {
   }
 });
 
+reportDialog.addEventListener('close', function() {
+  reportForm.reset();
+  nextButton.disabled = true;
+});
+
+let currentReportCard = null;
+
+nextButton.addEventListener('click', function () {
+  const isReportConfirmed = confirm('Вы уверены, что хотите пожаловаться на пин?');
+
+  if (isReportConfirmed === true) {
+     currentReportCard.remove();
+
+  }
+});
+
 function createHashtags(hashtags) {
   let result = "";
 
@@ -236,6 +252,7 @@ function createPin(pin) {
 
   reportButton.onclick = function () {
     closeMenus();
+    currentReportCard = card;
     reportDialog.showModal();
   };
 
